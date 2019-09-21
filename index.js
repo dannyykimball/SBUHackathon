@@ -1,141 +1,34 @@
-var app = require('express')();
+//var app = require('express')();
+var express = require('express');
+var app = express(); 
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
 
-const room = "skyline";
 const port = 3000;
 
-var users = [];
-
-var comp_id = "5d12a8eaf4294a3b9c6fecc5";
-
-/*
----------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------------------------------
-
-Socket.io (Index.js)
-
----------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------------------------------
-*/
+app.use(express.static('public'))
 
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/public/login.html');
 });
-//-------------------------------------------------Connected Users
-io.on('connection', function(socket){
-    socket.join(room);
-    users.push(socket.id);
-    console.log("Joined Room!");
-    console.log('Connected! People online: ' + users.length + " ||| with id:" + socket.id);
-    
 
-    io.emit('users_online', users.length);
-    io.emit('room_name', room);
-
-    //init_loadMessages(socket.id);
-});
-//--------------------------------------------------Disconnected Users
-io.on('connection', function(socket){
-    socket.on('disconnect', function(){
-
-        for(var i = 0; i<users.length; i++) //removes user from us
-        {
-            if(socket.id == users[i])
-            {
-                users.splice(i, 1); 
-            }
-        }
-        io.emit('users_online', users.length);
-        console.log('Disconnected! People online: ' + users.length  + " ||| with id:" + socket.id);
-    });
-});
-//---------------------------------------------------Messaging
-io.on('connection', function(socket){
-    socket.on('sent_message', function(msg){
-
-        saveMessage(comp_id,socket.id,msg); //saves message
-
-        for(var i = 0; i<users.length; i++)
-        {
-            if(users[i] != socket.id)
-            {
-                io.emit('recieved_message', msg); //displays message to recipients
-            }
-        }
-        io.sockets.connected[socket.id].emit('sent_message', msg); //displays message to sender
-    });
-});
-//---------------------------------------------------Create User
-io.on('connection', function(socket){
-    socket.on('user created', function(user_tuple){
-        createNewUser(user_tuple[0], user_tuple[1]);
-    });
-});
 //---------------------------------------------------
 http.listen(port, function(){
     console.log('listening on *:3000');
 });
 
-/*
----------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------------------------------
 
-Messaging
 
----------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------------------------------
-*/
-async function init_loadMessages(socketid)
-{
-    var msgs = await getChatHistory(comp_id);
-
-    for(var i = 0; i< msgs.length; i++)
-    {
-        if(msgs[i].senderID === socketid)
-            io.sockets.connected[socketid].emit('load_message_right', msgs[i].message); //loads messages only for the person who just joins the chat
-        else{
-            io.sockets.connected[socketid].emit('load_message_left', msgs[i].message); //loads messages only for the person who just joins the chat
-        }
-    }
-}
-
-async function saveMessage(comp_id,userId, msg)
-{
-    var msgObj = new group_Message(userId, msg);
-    var msgs = await addMessage(comp_id, msgObj);
-    console.log("Saved Message");
-}
-
-/*
----------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------------------------------
-
-Database (Account.js)
-
----------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------------------------------
-*/
 var async = require("async");
 var MongoClient = require('mongodb').MongoClient;
-var mongo_url = "mongodb+srv://kyritzb:Bryanmathew122@data-9xala.mongodb.net/test?retryWrites=true&w=majority"
+var mongo_url = "mongodb+srv://hii:femilovespearl@cluster0-gsayn.gcp.mongodb.net/test?retryWrites=true&w=majority";
 
-const user_dbName = "User_data";
-const user_collection_name = "user";
+const user_dbName = "Pearl";
+const user_collection_name = "users";
 
 
+createNewUser("lawl22@gmail.com", "yeah");
+console.log("created user!");
 class User {
-
-    /*
-    username;
-    password;
-    email;
-    userID;
-    firstName;
-    lastName;
-    chat history; array of message objects
-    */
-
     constructor(email, password)
     {
         this.username = "";
@@ -161,63 +54,6 @@ class User {
     }
     getChatHistory(){
         return this.chatHistory;
-    }
-
-}
-
-class dm_message
-{
-    /*
-    sender_ID
-    reciever_ID
-    message
-    time
-    */
-   constructor(senderID, recieverID, message, time)
-   {
-       this.senderID = senderID;
-       this.recieverID = recieverID;
-       this.message = message;
-       this.time = time;
-   }
-   getSenderID(){
-       return this.senderID;
-   }
-   getRecieverID(){
-       return this.recieverID;
-   }
-   getMessage(){
-       return this.message;
-   }
-   getTime(){
-       return this.time;
-   }
-}
-
-class group_Message 
-{
-    /*
-    chat_ID
-    sender_ID
-    message
-    time
-    */
-    constructor(senderID, message)
-    {
-        this.senderID = senderID;
-        this.message = message;
-    }
-    getChatID(){
-        return this.chatID;
-    }
-    getSenderID(){
-        return this.senderID;
-    }
-    getMessage(){
-        return this.message;
-    }
-    getTime(){
-        return this.time;
     }
 
 }

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <div class="center">
+        <h1>Sell!</h1>
+      </div>
+      
+</head>
+<body>
+
+
+
+
+    <div class="wrapper"> 
+      <p>Category</p>
+        <div class="ace"><input type="checkbox">Electronics</div>
+        <div class="ace"><input type="checkbox">Appliances</div>
+        <div class="ace"><input type="checkbox">Furniture</div>
+        <div class="ace"><input type="checkbox">Tools</div>
+        <div class="ace"><input type="checkbox">Autoparts</div>
+        <div class="ace"><input type="checkbox">Other/Misc</div>
+<div>
+
+  <div class="wrapper2">
+    <p>Product name</p>
+    <input type="text" placeholder="Enter your product name." name="uname" required>
+    <p class="a">
+        <p>Description</p>
+        <textarea rows="4" cols="50" placeholder="Enter a description for your product!"></textarea>
+      </p>
+      
+  
+  </div>
+  <p class= "a">
+  </p>
+
+  <div id="drop-area">
+      <form class="my-form">
+        <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
+        <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+        <label class="button" for="fileElem">Select some files</label>
+      </form>
+    </div>
+
+<script>
+
+
+
+
+
+</script>
+<style>
+
+.p.a{
+  white-space: pre;
+}
+
+
+.wrapper{
+  position: absolute;
+  bottom: 350px;
+  right: 30%;
+}
+
+
+.ace{
+  display: inline-block;
+
+}
+.html, body{
+  background-color: cornflowerblue;
+}
+  
+.center{
+    position: relative;
+    font-size: 20px;
+    margin: 0;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    -ms-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+}
+</style>
+
+</body>
+</html>

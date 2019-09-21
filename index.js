@@ -29,6 +29,7 @@ io.on('connection', function(socket){
         createNewUser(user_tuple[0], user_tuple[1]);
     });
     
+    
 });
 
 io.on('connection', function(socket){
@@ -48,8 +49,135 @@ io.on('connection', function(socket){
     });
     
 });
+//--------------------------------------------------
+
+// DATABASE USER SELLING
+
+//--------------------------------------------------
+var async = require("async");
+var fs = require("fs");
+var MongoClient = require('mongodb').MongoClient;
+var mongo_url = "mongodb+srv://hii:femilovespearl@cluster0-gsayn.gcp.mongodb.net/test?retryWrites=true&w=majority";
+
+const item_dbName = "Pearl";
+const item_collection_name = "selling_objects";
+
+class Selling_Object
+{
+    constructor(name, price, category, desc, pic, posterID)
+    {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.desc = desc;
+        this.pic = pic;
+        this.posterID = posterID;
+    }
+}
+
+
+createNewItem("chair", 30, "furniture", "yeah", "aa", "78675463524");
+//------------------------------------------------------------------------------
+async function getAllItems()
+{
+    var items = await getAllItemsAsync();
+    return items;
+}
+//------------------------------------------------------------------------------
+//returns item object that the user owns
+async function getAllItemsAsync()
+{
+    MongoClient.connect(mongo_url, function(err, client) 
+    {
+        if(!err) {
+            const db = client.db(item_dbName);
+            const collection = db.collection(item_collection_name);
+
+            var arr = [];
+            collection.find({}).toArray(function(err, result) {
+                if (err) throw err;
+                for(var i = 0; i< result.length; i++)
+                {
+                    arr.push[result];
+                }
+            });
+            return arr;
+            client.close();
+        }
+        else{
+            console.log(err);
+        }
+    });
+}
+//------------------------------------------------------------------------------
+async function getUserItems(user_ID)
+{
+    var items = await getUserItemsAsync(user_ID);
+    return items;
+}
+//------------------------------------------------------------------------------
+//returns item object that the user owns
+async function getUserItemsAsync(user_ID)
+{
+    MongoClient.connect(mongo_url, function(err, client) 
+    {
+        if(!err) {
+            const db = client.db(item_dbName);
+            const collection = db.collection(item_collection_name);
+
+            var arr = [];
+            collection.find({}).toArray(function(err, result) {
+                if (err) throw err;
+                for(var i = 0; i< result.length; i++)
+                {
+                    if(result[i].posterID == user_ID)
+                    {
+                        arr.push[result];
+                    }
+                }
+            });
+            return arr;
+            client.close();
+        }
+        else{
+            console.log(err);
+        }
+    });
+}
+//---------------------------------------------------------------------------------
+async function createNewItem(name, price, category, desc, pic, posterID)
+{
+    var temp = new Selling_Object(name, price, category, desc, pic, posterID);
+    createNewItemAsync(temp);
+}
+//---------------------------------------------------------------------------------
+//Creates a new user given a user object async
+async function createNewItemAsync(new_Item)
+{
+    MongoClient.connect(mongo_url, function(err, client) 
+    {
+        if(!err) {
+          const db = client.db(item_dbName);
+          const collection = db.collection(item_collection_name);
+          collection.insertOne(new_Item, (err, result) => {
+              console.log("Added new item");
+          })
+      
+        }
+        else{
+          console.log("Failed:");
+          console.log(err);
+        }
+        client.close();
+    });
+}
 //---------------------------------------------------
-// DATABASE
+
+
+
+// DATABASE USER LOGINS
+
+
 //--------------------------------------------------
 
 var async = require("async");

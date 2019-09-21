@@ -24,7 +24,7 @@ The system throws errors at you if you decide to log-in without entering a corre
 
 ### Tutorial/Main Page
 
-The tutorial page goes over briefly on how to access and use the Pearl Service.
+The tutorial page goes over briefly on how to access and use the Pearl Service, which should hopefully provide you with a good understanding on how to utilize the Pearl Service!
 
 ## SBU Hacks 2019
 

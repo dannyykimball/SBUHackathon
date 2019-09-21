@@ -19,7 +19,7 @@ Once this message is printed out, go to [http://localhost:3000](http://localhost
 
 ## Creating an Account
 
-Once you create an account the details go up to the cloud(MongoDB) and are stored there even after the page is closed/refresed
+Once you create an account the details go up to the cloud(MongoDB) and are stored there even after the page is closed/refresed.
 The system throws errors at you if you decide to log-in without entering a correct email/password so make sure you type carefully!
 
 ### Tutorial/Main Page

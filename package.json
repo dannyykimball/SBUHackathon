@@ -1,0 +1,29 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^12.0.8",
+    "async": "^3.1.0",
+    "bluebird": "^3.5.5",
+    "buffers": "^0.1.1",
+    "express": "^4.17.1",
+    "fibers": "^4.0.1",
+    "http-server": "^0.11.1",
+    "istanbul": "^0.4.5",
+    "lodash": "^4.17.14",
+    "merge-descriptors": "^1.0.1",
+    "mongodb": "^3.2.7",
+    "mysql": "^2.17.1",
+    "nan": "^2.14.0",
+    "node-pre-gyp": "^0.13.0",
+    "npmlog": "^4.1.2",
+    "socket.io": "^2.2.0"
+  }
+}

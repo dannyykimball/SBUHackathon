@@ -1,40 +1,331 @@
 <!doctype html>
+<html>
+  <head>
+    <title>Bryman chat</title>
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        body 
+        { 
+            font: 13px Helvetica, Arial; 
+        }
+        form 
+        { 
+            background: #000;
+            padding: 4px; 
+            position: fixed; 
+            bottom: 0;
+            width: 74%; 
+            left: 25%;
+        }
+        form input 
+        { 
+            border: 0; 
+            padding: 10px; 
+            width: 90%; 
+        }
+        form button 
+        { 
+            width: 9%; 
+            background: #02f737; 
+            border: none; 
+            padding: 10px; 
+        }
+        #message_box
+        {
+            position: fixed;
+            width: 74%;
+            height: 44%;
+            left: 25%;
+            top: 50%;
+            border:2px solid black;
+            background: gray;
+            overflow-y: auto;
+        }
+        #messages 
+        { 
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        #messages li
+        { 
+            text-align: right;
+            padding: 5px 10px; 
+        }
+        #messages li:nth-child(odd) 
+        { 
+            text-align: left;
+            background: #eee; 
+        }
+        #vid_container
+        {
+          position: fixed;
+          width: 74%;
+          height: 47%;
+          top: 1%;
+          left: 25%;
+          background: blue;
+        }
+        #local_video
+        {
+          position: fixed;
+          background: red;
+          height: 350px;
+          width: 350px;
+          left: 37%;
+        }
+        #incoming_video
+        {
+          position: fixed;
+          background: red;
+          height: 350px;
+          width: 350px;
+          right: 13%;
+        }
+        #users_online
+        {
+          position: fixed;
+          left: 15%;
+          top: 2%;
+          font: 15px Helvetica, Arial; 
+        }
+        #room_name
+        {
+          position: fixed;
+          left: 15%;
+          top: 4%;
+          font: 15px Helvetica, Arial; 
+        }
+        #showVideo
+        {
+          position: fixed;
+          top: 2%;
+          left: 25.5%;
+        }
+        #user
+        {
+            position: fixed;
+            width: 10%;
+            height: 5%;
+            left: 2%;
+            top: 5%;
+            border:2px solid black;
+            background: gray;
+            overflow-y: auto;
+        }
+        #pass
+        {
+            position: fixed;
+            width: 10%;
+            height: 5%;
+            left: 2%;
+            top: 10%;
+            border:2px solid black;
+            background: gray;
+            overflow-y: auto;
+        }
+        #createUser
+        {
+          position: fixed;
+          top: 15%;
+          left: 2%;
+        }
+    </style>
+  </head>
 
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <link rel = "stylesheet"
-  type = "text/css"
-  href = "design.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <title>Pearl</title>
-  <!--This might mess with mobile and scaling compatability maybe change later -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+    //-----------------------------------------------------SOCKET.IO-----------------------------------------------------
+    var socket = io();
 
-  <meta name="description" content="Pearl">
-  <meta name="author" content="Adam Farid">
+    $(function () 
+    {
 
-  <link rel="stylesheet" href="css/styles.css?v=1.0">
+      $('form').submit(function(e){
+        e.preventDefault(); // prevents page reloading
+        socket.emit('sent_message', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+      
 
-</head>
-
-<body>
-
-
-<div class ="center">
-    <h1>Pearl</h1>
-</div>
-<div class = "box">
- <h3>Sign in</h3>
-</div>
-<div class="login">
-    <input type="text" placeholder="Username" id="username">  
-  <input type="password" placeholder="password" id="password">  
-  <input type="submit" value="Sign In">
-</div>
-<a href="#" class="forgot">forgot password?</a>
+      socket.on('load_message_left', function(msg){
+        $('#messages').append($('<li>').text(msg).css("text-align", "left"));
+      });
+      
+      socket.on('load_message_right', function(msg){
+        $('#messages').append($('<li>').text(msg).css("text-align", "right"));
+      });
 
 
+      socket.on('sent_message', function(msg){
+        $('#messages').append($('<li>').text(msg).fadeIn().css("text-align", "right"));
+      });
 
-</body>
+      socket.on('recieved_message', function(msg){
+        $('#messages').append($('<li>').text(msg).fadeIn().css("text-align", "left"));
+      });
+
+      //Displays Users Online
+      socket.on('users_online', function(ppl_online){
+        $('#users_online').text("Users Online: " + ppl_online);
+      });
+
+      //Displays Room Name
+      socket.on('room_name', function(room_name){
+        $('#room_name').text("Room Name: " + room_name);
+      });
+
+      //Creates User 
+      var createUser_ButtonClicked;
+      $("#createUser").click(function()
+      {
+          var email = $('#user').val();
+          var pass = $('#pass').val();
+          
+          var user_tuple = [email, pass];
+
+          socket.emit('user created', user_tuple);
+
+          alert("Created User: [" + email + "] [" + pass + "]");
+          //resets input values
+          $('#user').val('');
+          $('#pass').val('');
+      });
+
+      //Call
+      var createUser_ButtonClicked;
+      $("#showVideo").click(function()
+      {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia(constraints);
+          handleSuccess(stream);
+          e.target.disabled = true;
+        } catch (e) {
+          handleError(e);
+        }
+        
+      });
+
+
+    });
+
+    function calling(stream, constraints)
+    {
+      //socket.emit('send_video_stream', stream);
+      
+      const local_video = document.getElementById('local_video');
+      const videoTracks = stream.getVideoTracks();
+      console.log('Got stream with constraints:', constraints);
+      console.log(`Using video device: ${videoTracks[0].label}`);
+      window.stream = stream; // make variable available to browser console
+      local_video.srcObject = stream;
+    }
+
+  </script>
+
+  <body>
+    <div id= "message_box">
+        <ul id="messages"></ul>
+    </div>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+
+    <div id="vid_container">
+      <video id="local_video" autoplay playsinline></video>
+      <video id="incoming_video" autoplay playsinline></video>
+      <div id="errorMsg"></div>
+    </div>
+
+    <button id="showVideo">Open camera</button>
+
+    <input id="user">
+    <input id="pass">
+    <button id="createUser">Create User</button>
+
+  <p id = "users_online">Users Online: </p>
+  <p id = "room_name">Room Name: </p>
+  </body>
+
+
+  <script>
+    //-----------------------------------------------------VIDEO-----------------------------------------------------
+      const constraints = window.constraints = {
+        audio: false,
+        video: true
+      };
+  
+      function handleSuccess(stream) {
+       // const video = document.querySelector('video');
+        calling(stream, constraints);
+      }
+  
+      function handleError(error) {
+        if (error.name === 'ConstraintNotSatisfiedError') {
+          let v = constraints.video;
+          errorMsg(`The resolution ${v.width.exact}x${v.height.exact} px is not supported by your device.`);
+        } else if (error.name === 'PermissionDeniedError') {
+          errorMsg('Permissions have not been granted to use your camera and ' +
+            'microphone, you need to allow the page access to your devices in ' +
+            'order for the demo to work.');
+        }
+        errorMsg(`getUserMedia error: ${error.name}`, error);
+      }
+  
+      function errorMsg(msg, error) {
+        const errorElement = document.querySelector('#errorMsg');
+        errorElement.innerHTML += `<p>${msg}</p>`;
+        if (typeof error !== 'undefined') {
+          console.log(error);
+        }
+      }
+  
+      function init(e) {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia(constraints);
+          handleSuccess(stream);
+          e.target.disabled = true;
+        } catch (e) {
+          handleError(e);
+        }
+      }
+
+      document.querySelector('#showVideo').addEventListener('click', e => init(e));
+    </script>
+
+    
+    <script>
+      //-----------------------------------------------------PIP-----------------------------------------------------
+        document.addEventListener("visibilitychange", function() {
+        if(document.hidden)
+            pip();
+        else
+            unpip();
+        }, false);
+
+
+        function pip()
+        {
+          local_video.requestPictureInPicture()
+          .catch(error => {
+              // Video failed to enter Picture-in-Picture mode.
+              console.log("Failed to PIP");
+          });
+        }
+
+        function unpip()
+        {
+          document.exitPictureInPicture()
+          .catch(error => {
+              // Video failed to leave Picture-in-Picture mode.
+          });
+        }
+    </script>
+
 </html>

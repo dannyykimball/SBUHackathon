@@ -419,18 +419,12 @@
 
 	async function login()
 		{		
-			var compName = document.getElementById("companyName").value;
-			var userName = document.getElementById("user").value;
-			var password = document.getElementById("pass").value;
+			var user = document.getElementById("user").value;
+			var pass = document.getElementById("pass").value;
 
-			localStorage.setItem('userName', userName)
-			window.location.href = ""; //go to next page
-			/*
-			if(compName.length == 0)
-			{
-				alert("Enter a company name");
-			}
-			else if(user.length == 0)
+			
+
+			if(user.length == 0)
 			{
 				alert("Enter an email");
 			}
@@ -440,24 +434,18 @@
 			}
 			else //logging in 
 			{
-				var success = true;
-				await firebase.auth().signInWithEmailAndPassword(userName, password).catch(function(error) {
-					// Handle Errors here.
-					var errorCode = error.code;
-					var errorMessage = error.message;
-					success = false;
-					alert(errorMessage);
-				});
+	
+				var user_tuple = [user, pass];
+				socket.emit('user_log_in', user_tuple );
 
-				if(success)
-				{
-					console.log("Logged in!");
-					localStorage.setItem('companyName', compName);
-					localStorage.setItem('userName', userName)
-					window.location.href = "video.html";
-				}
+				/*
+				localStorage.setItem('companyName', compName);
+				localStorage.setItem('userName', userName)
+				window.location.href = "video.html";
+				*/
+				
 			}
-			*/
+			
 		}
 
 		/*

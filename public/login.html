@@ -384,6 +384,25 @@
 
 <script>
 	
+	//---------------------------------------
+	$(function () 
+	{
+		socket.on('login_status', function(result){
+
+
+			if(!result)
+			{
+				alert("Login not found");
+			}
+			else
+			{
+				localStorage.setItem('name', result[0]);
+				localStorage.setItem('pass', result[1]);
+				window.location.href = "main.html";
+			}
+		});
+	});
+	//---------------------------------------
 	function startUp()
 	{
 		var create_Company_Page = document.getElementsByClassName("create_Company_Page");
@@ -422,8 +441,6 @@
 			var user = document.getElementById("user").value;
 			var pass = document.getElementById("pass").value;
 
-			
-
 			if(user.length == 0)
 			{
 				alert("Enter an email");
@@ -434,16 +451,8 @@
 			}
 			else //logging in 
 			{
-	
 				var user_tuple = [user, pass];
-				socket.emit('user_log_in', user_tuple );
-
-				/*
-				localStorage.setItem('companyName', compName);
-				localStorage.setItem('userName', userName)
-				window.location.href = "video.html";
-				*/
-				
+				socket.emit('user_log_in', user_tuple );		
 			}
 			
 		}
@@ -487,7 +496,7 @@
 					var user_tuple = [email, pass];
 					
 					socket.emit('user created', user_tuple);
-					alert("Created User: [" + email + "] [" + pass + "]");
+					alert("Successfully Created User!");
 					login_screen_create_Account_back();
 				}
 			}

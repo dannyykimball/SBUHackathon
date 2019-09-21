@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Log In</title>
+
+  <style>
+		body{
+		margin: 0;
+		padding: 0;
+		background: #fff;
+		color: #fff;
+		font-family: Arial;
+		font-size: 12px;
+		overflow-x: hidden;
+		overflow-y: hidden;
+		}
+
+		.body{
+		position: absolute;
+		top: -20px;
+		left: -20px;
+		right: -40px;
+		bottom: -40px;
+		width: auto;
+		height: auto;
+		background-image: url(./assets/background.jpeg);
+		background-size: cover;
+		-webkit-filter: blur(5px);
+		z-index: 0;
+		}
+
+		.grad{
+		position: absolute;
+		top: -20px;
+		left: -20px;
+		right: -40px;
+		bottom: -40px;
+		width: auto;
+		height: auto;
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+		z-index: 1;
+		opacity: 0.7;
+		}
+
+		.header{
+		position: absolute;
+		top: calc(50% - 35px);
+		left: calc(50% - 255px);
+		z-index: 2;
+		}
+
+		.header div{
+		float: left;
+		color: #fff;
+		font-family: 'Exo', sans-serif;
+		font-size: 35px;
+		font-weight: 200;
+		}
+
+		.header div span{
+		color: #5379fa !important;
+		}
+
+		.login{
+		position: absolute;
+		top: calc(50% - 100px);
+		left: calc(50% - 50px);
+		height: 150px;
+		width: 350px;
+		padding: 10px;
+		z-index: 2;
+		}
+
+		.create_Company_Page{
+		position: absolute;
+		top: calc(50% - 100px);
+		left: calc(50% - 50px);
+		height: 150px;
+		width: 350px;
+		padding: 10px;
+		z-index: 2;
+		}
+
+		.create_Company_Page input[type=text]{
+		width: 250px;
+		height: 30px;
+		background: transparent;
+		border: 1px solid rgba(255,255,255,0.6);
+		border-radius: 2px;
+		color: #fff;
+		font-family: 'Exo', sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		padding: 4px;
+		margin-top: 10px;
+		}
+
+		.create_Company_Page input[type=button]:hover{
+		opacity: 0.8;
+		}
+
+		.create_Company_Page input[type=button]:active{
+		opacity: 0.6;
+		}
+
+		.create_Company_Page{
+		position: absolute;
+		top: calc(50% - 100px);
+		left: calc(50% - 50px);
+		height: 150px;
+		width: 350px;
+		padding: 10px;
+		z-index: 2;
+		}
+
+		.create_Company_Page input[type=text]{
+		width: 250px;
+		height: 30px;
+		background: transparent;
+		border: 1px solid rgba(255,255,255,0.6);
+		border-radius: 2px;
+		color: #fff;
+		font-family: 'Exo', sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		padding: 4px;
+		margin-top: 10px;
+		}
+
+		.create_Company_Page input[type=button]:hover{
+		opacity: 0.8;
+		}
+
+		.create_Company_Page input[type=button]:active{
+		opacity: 0.6;
+		}
+
+		.create_Account_Page
+		{
+			position: absolute;
+			top: calc(50% - 100px);
+			left: calc(50% - 50px);
+			height: 150px;
+			width: 350px;
+			padding: 10px;
+			z-index: 2;
+		}
+		
+		.create_Account_Page input[type=text]{
+		width: 250px;
+		height: 30px;
+		background: transparent;
+		border: 1px solid rgba(255,255,255,0.6);
+		border-radius: 2px;
+		color: #fff;
+		font-family: 'Exo', sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		padding: 4px;
+		margin-top: 10px;
+		}
+		.create_Account_Page input[type=password]{
+			width: 250px;
+			height: 30px;
+			background: transparent;
+			border: 1px solid rgba(255,255,255,0.6);
+			border-radius: 2px;
+			color: #fff;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 4px;
+			margin-top: 10px;
+		}
+
+
+		.create_Account_Page input[type=button]:hover{
+		opacity: 0.8;
+		}
+
+		.create_Account_Page input[type=button]:active{
+		opacity: 0.6;
+		}
+
+
+		.login input[type=text]{
+		width: 250px;
+		height: 30px;
+		background: transparent;
+		border: 1px solid rgba(255,255,255,0.6);
+		border-radius: 2px;
+		color: #fff;
+		font-family: 'Exo', sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		padding: 4px;
+		margin-top: 10px;
+		}
+
+		.company{
+		position: absolute;
+		top: calc(50% - 75px);
+		left: calc(50% - 50px);
+		height: 150px;
+		width: 350px;
+		padding: 10px;
+		z-index: 2;
+		}
+
+		.company input[type=text]{
+		width: 250px;
+		height: 30px;
+		background: transparent;
+		border: 1px solid rgba(255,255,255,0.6);
+		border-radius: 2px;
+		color: #fff;
+		font-family: 'Exo', sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		padding: 4px;
+		}
+		.login input[type=password]{
+		width: 250px;
+		height: 30px;
+		background: transparent;
+		border: 1px solid rgba(255,255,255,0.6);
+		border-radius: 2px;
+		color: #fff;
+		font-family: 'Exo', sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		padding: 4px;
+		margin-top: 10px;
+		}
+
+
+		.login_butt
+		{
+			width: 260px;
+			height: 35px;
+			background: #fff;
+			border: 1px solid #fff;
+			cursor: pointer;
+			border-radius: 2px;
+			color: #a18d6c;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 6px;
+			margin-top: 10px;
+		}
+		.create_Company_butt
+		{
+			width: 207px;
+			height: 35px;
+			background: #fff;
+			border: 1px solid #fff;
+			cursor: pointer;
+			border-radius: 2px;
+			color: #a18d6c;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 6px;
+			margin-top: 10px;
+		}
+		.create_Account_butt
+		{
+			width: 207px;
+			height: 35px;
+			background: #fff;
+			border: 1px solid #fff;
+			cursor: pointer;
+			border-radius: 2px;
+			color: #a18d6c;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 6px;
+			margin-top: 10px;
+		}
+		.back_butt
+		{
+			width: 50px;
+			height: 35px;
+			background: #fff;
+			border: 1px solid #fff;
+			cursor: pointer;
+			border-radius: 2px;
+			color: #a18d6c;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 6px;
+			margin-top: 10px;
+		}
+		.company_and_Account_butt
+		{
+			width: 260px;
+			height: 35px;
+			background: #fff;
+			border: 1px solid #fff;
+			cursor: pointer;
+			border-radius: 2px;
+			color: #a18d6c;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 6px;
+			margin-top: 10px;
+		}
+
+		.login input[type=button]:hover{
+		opacity: 0.8;
+		}
+
+		.login input[type=button]:active{
+		opacity: 0.6;
+		}
+
+		.login input[type=text]:focus{
+		outline: none;
+		border: 1px solid rgba(255,255,255,0.9);
+		}
+
+		.company input[type=text]:focus{
+		outline: none;
+		border: 1px solid rgba(255,255,255,0.9);
+		}
+
+		.login input[type=password]:focus{
+		outline: none;
+		border: 1px solid rgba(255,255,255,0.9);
+		}
+
+		.login input[type=button]:focus{
+		outline: none;
+		}
+
+		::-webkit-input-placeholder{
+			color: rgba(255,255,255,0.6);
+		}
+
+		::-moz-input-placeholder{
+			color: rgba(255,255,255,0.6);
+		}
+
+		</style>
+</head>
+
+<body onload="startUp()">
+  <div class="body"></div>
+		<div class="grad"></div>
+		<div class="header">
+			<div>P E <span> A </span>R L</div>
+		</div>
+		<br>
+		<div class="login">
+				<input id = "user" type="text" placeholder="Email" name="user"><br>
+				<input id = "pass" type="password" placeholder="Password" name="password"><br>
+				<input class = "login_butt" type="button" value="Login" onclick = "login()">
+				<div>
+						<input class = "company_and_Account_butt" type="button" value="Create Login" onclick = "login_screen_create_Account()">
+				</div>
+		</div>
+		<div class="create_Account_Page">
+				<input id = "create_new_User" type="text" placeholder="Email" name="user">
+				<input id = "create_new_Pass" type="password" placeholder="New Password" name="password1">
+				<input id = "create_new_Pass_2" type="password" placeholder="Re-enter Password" name="password2">
+				<div>
+						<input class = "create_Account_butt" type="button" value="Create Account" onclick = "create_new_Account()">
+						<input class = "back_butt" type="button" value="Back" onclick = "login_screen_create_Account_back()">
+				</div>
+		</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="./js/login_animations.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+<script>
+	
+	function startUp()
+	{
+		var create_Company_Page = document.getElementsByClassName("create_Company_Page");
+		var create_Account_Page = document.getElementsByClassName("create_Account_Page");
+		$(create_Company_Page).toggle();
+		$(create_Company_Page).fadeOut();
+		$(create_Account_Page).toggle();
+		$(create_Account_Page).fadeOut();
+	}
+
+	///------------------------------------
+
+	//----------------------------
+	/*
+		function to set visability of elements
+		Call it like this:
+		$("#someElem").invisible();
+		$("#someOther").visible();
+	*/
+	(function($) {
+	$.fn.invisible = function() {
+		return this.each(function() {
+			$(this).css("visibility", "hidden");
+		});
+	};
+	$.fn.visible = function() {
+		return this.each(function() {
+			$(this).css("visibility", "visible");
+		});
+	};
+	}(jQuery));
+
+
+	async function login()
+		{		
+			var compName = document.getElementById("companyName").value;
+			var userName = document.getElementById("user").value;
+			var password = document.getElementById("pass").value;
+
+			localStorage.setItem('userName', userName)
+			window.location.href = ""; //go to next page
+			/*
+			if(compName.length == 0)
+			{
+				alert("Enter a company name");
+			}
+			else if(user.length == 0)
+			{
+				alert("Enter an email");
+			}
+			else if(pass.length == 0)
+			{
+				alert("Enter a Password");
+			}
+			else //logging in 
+			{
+				var success = true;
+				await firebase.auth().signInWithEmailAndPassword(userName, password).catch(function(error) {
+					// Handle Errors here.
+					var errorCode = error.code;
+					var errorMessage = error.message;
+					success = false;
+					alert(errorMessage);
+				});
+
+				if(success)
+				{
+					console.log("Logged in!");
+					localStorage.setItem('companyName', compName);
+					localStorage.setItem('userName', userName)
+					window.location.href = "video.html";
+				}
+			}
+			*/
+		}
+
+		/*
+			Verifys if an account exists
+			Returns True if the account exists
+			Returns False if the account does not exist
+		*/
+		var socket = io();
+		async function create_new_Account()
+		{
+			var user = document.getElementById("create_new_User").value;
+			var pass1 = document.getElementById("create_new_Pass").value;
+			var pass2 = document.getElementById("create_new_Pass_2").value;
+
+			if(user.length == 0)
+			{
+				alert("Enter a Username");
+			}
+			else if(pass1.length == 0)
+			{
+				alert("Enter a Password");
+			}
+			else if(pass2.length == 0)
+			{
+				alert("Re-enter the password");
+			}
+			else if(pass1 != pass2)
+			{
+				alert("Passwords do not match");
+			}
+			else //create account
+			{
+				var success = true;
+				
+				if(success)
+				{
+					var email = user;
+					var pass = pass1;
+					var user_tuple = [email, pass];
+					
+					socket.emit('user created', user_tuple);
+					alert("Created User: [" + email + "] [" + pass + "]");
+					login_screen_create_Account_back();
+				}
+			}
+		}
+
+</script>
+
+</body>
+
+</html>

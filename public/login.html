@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Log In</title>
+
+  <style>
+		body{
+			margin: 0;
+			padding: 0;
+			background: #BCBCF2;
+			color: #BCBCF2;
+			font-family: Arial;
+			font-size: 12px;
+			overflow-x: hidden;
+			overflow-y: hidden;
+		}
+
+		.body{
+			position: absolute;
+			top: -20px;
+			left: -20px;
+			right: -40px;
+			bottom: -40px;
+			width: auto;
+			height: auto;
+			background-size: cover;
+			z-index: 0;
+		}
+
+		.grad{
+			position: absolute;
+			top: -20px;
+			left: -20px;
+			right: -40px;
+			bottom: -40px;
+			width: auto;
+			height: auto;
+			z-index: 1;
+			opacity: 0.7;
+		}
+
+		.header{
+			position: absolute;
+			top: calc(50% - 20px);
+			left: calc(50% - 255px);
+			z-index: 2;
+		}
+
+		.header div{
+			float: left;
+			color: #fff;
+			font-family: 'Exo', sans-serif;
+			font-size: 35px;
+			font-weight: 200;
+		}
+
+		.header div span{
+			color: #BAF7DC !important;
+		}
+
+		.login{
+			position: absolute;
+			top: calc(50% - 100px);
+			left: calc(50% - 50px);
+			height: 150px;
+			width: 350px;
+			padding: 10px;
+			z-index: 2;
+		}
+
+		.create_Account_Page
+		{
+			position: absolute;
+			top: calc(50% - 100px);
+			left: calc(50% - 50px);
+			height: 150px;
+			width: 350px;
+			padding: 10px;
+			z-index: 2;
+		}
+		
+		.create_Account_Page input[type=text]{
+			width: 250px;
+			height: 30px;
+			background: transparent;
+			border: 1px solid rgba(255,255,255,0.6);
+			border-radius: 2px;
+			color: #fff;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 4px;
+			margin-top: 10px;
+		}
+		.create_Account_Page input[type=password]{
+			width: 250px;
+			height: 30px;
+			background: transparent;
+			border: 1px solid rgba(255,255,255,0.6);
+			border-radius: 2px;
+			color: #fff;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 4px;
+			margin-top: 10px;
+		}
+
+
+		.create_Account_Page input[type=button]:hover{
+			opacity: 0.8;
+		
+		}
+
+		.create_Account_Page input[type=button]:active{
+			opacity: 0.6;
+		}
+
+
+		.login input[type=text]{
+			width: 250px;
+			height: 30px;
+			background: transparent;
+			border: 1px solid rgba(255,255,255,0.6);
+			border-radius: 2px;
+			color: #fff;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 4px;
+			margin-top: 10px;
+		}
+
+		.login input[type=password]{
+			width: 250px;
+			height: 30px;
+			background: transparent;
+			border: 1px solid rgba(255,255,255,0.6);
+			border-radius: 2px;
+			color: #fff;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 4px;
+			margin-top: 10px;
+		}
+
+
+		.login_butt
+		{
+			width: 260px;
+			height: 35px;
+			background: #EDF8FF;
+			border: 1px solid #EDF8FF;
+			cursor: pointer;
+			border-radius: 2px;
+			color: #0C0F0F;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 6px;
+			margin-top: 10px;
+		}
+		.create_Account_butt
+		{
+			width: 207px;
+			height: 35px;
+			background: #EDF8FF;
+			border: 1px solid #EDF8FF;
+			cursor: pointer;
+			border-radius: 2px;
+			color: #0C0F0F;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 6px;
+			margin-top: 10px;
+		}
+		.back_butt
+		{
+			width: 50px;
+			height: 35px;
+			background: #EDF8FF;
+			border: 1px solid #EDF8FF;
+			cursor: pointer;
+			border-radius: 2px;
+			color: #0C0F0F;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 6px;
+			margin-top: 10px;
+		}
+		.company_and_Account_butt
+		{
+			width: 260px;
+			height: 35px;
+			background: #EDF8FF;
+			border: 1px solid #EDF8FF;
+			cursor: pointer;
+			border-radius: 2px;
+			color: #0C0F0F;
+			font-family: 'Exo', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			padding: 6px;
+			margin-top: 10px;
+		}
+
+		.login input[type=button]:hover{
+			opacity: 0.8;
+		}
+
+		.login input[type=button]:active{
+			opacity: 0.6;
+		}
+
+		.login input[type=text]:focus{
+			outline: none;
+			border: 1px solid rgba(255,255,255,0.9);
+		}
+
+		.login input[type=password]:focus{
+			outline: none;
+			border: 1px solid rgba(255,255,255,0.9);
+		}
+
+		.login input[type=button]:focus{
+		outline: none;
+		}
+
+		::-webkit-input-placeholder{
+			color: rgba(255,255,255,0.6);
+		}
+
+		::-moz-input-placeholder{
+			color: rgba(255,255,255,0.6);
+		}
+
+		.logo
+		{
+			width: 220px;
+			height: 220px;
+			position: absolute;
+			top: calc(30% + 15px);
+			left: calc(25.7%);
+			padding: 6px;
+			margin-top: 10px;
+		}
+
+		.slogan
+		{
+			width: 400px;
+			height: 70px;
+			position: absolute;
+			top: calc(24% );
+			left: calc(50% - 200px);
+		}
+		</style>
+</head>
+
+<body onload="startUp()">
+  <div class="body"></div>
+		<div class="grad"></div>
+		<div class="header">
+			<div>P E <span> A </span>R L</div>
+		</div>
+		<br>
+
+		<img class = "logo" src="/assets/pearl_logo.png" alt="Pearl Logo">
+		<img class = "slogan" src="/assets/slogan.png" alt="Pearl Slogan">
+		<div class="login">
+				<input id = "user" type="text" placeholder="Email" name="user"><br>
+				<input id = "pass" type="password" placeholder="Password" name="password"><br>
+				<input class = "login_butt" type="button" value="Login" onclick = "login()">
+				<div>
+						<input class = "company_and_Account_butt" type="button" value="Create Login" onclick = "login_screen_create_Account()">
+				</div>
+		</div>
+		<div class="create_Account_Page">
+				<input id = "create_new_User" type="text" placeholder="Email" name="user">
+				<input id = "create_new_Pass" type="password" placeholder="New Password" name="password1">
+				<input id = "create_new_Pass_2" type="password" placeholder="Re-enter Password" name="password2">
+				<div>
+						<input class = "create_Account_butt" type="button" value="Create Account" onclick = "create_new_Account()">
+						<input class = "back_butt" type="button" value="Back" onclick = "login_screen_create_Account_back()">
+				</div>
+		</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="./js/login_animations.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+<script>
+	
+	//---------------------------------------
+	$(function () 
+	{
+		socket.on('login_status', function(result){
+
+
+			if(!result)
+			{
+				alert("Login not found");
+			}
+			else
+			{
+				localStorage.setItem('name', result.email);
+				localStorage.setItem('ID', result._id);
+				window.location.href = "main.html";
+			}
+		});
+	});
+	//---------------------------------------
+	function startUp()
+	{
+		var create_Company_Page = document.getElementsByClassName("create_Company_Page");
+		var create_Account_Page = document.getElementsByClassName("create_Account_Page");
+		$(create_Company_Page).toggle();
+		$(create_Company_Page).fadeOut();
+		$(create_Account_Page).toggle();
+		$(create_Account_Page).fadeOut();
+	}
+	
+	(function($) {
+	$.fn.invisible = function() {
+		return this.each(function() {
+			$(this).css("visibility", "hidden");
+		});
+	};
+	$.fn.visible = function() {
+		return this.each(function() {
+			$(this).css("visibility", "visible");
+		});
+	};
+	}(jQuery));
+
+
+	async function login()
+		{		
+			var user = document.getElementById("user").value;
+			var pass = document.getElementById("pass").value;
+
+			if(user.length == 0)
+			{
+				alert("Enter an email");
+			}
+			else if(pass.length == 0)
+			{
+				alert("Enter a Password");
+			}
+			else //logging in 
+			{
+				var user_tuple = [user, pass];
+				socket.emit('user_log_in', user_tuple );		
+			}
+			
+		}
+
+		/*
+			Verifys if an account exists
+			Returns True if the account exists
+			Returns False if the account does not exist
+		*/
+		var socket = io();
+		async function create_new_Account()
+		{
+			var user = document.getElementById("create_new_User").value;
+			var pass1 = document.getElementById("create_new_Pass").value;
+			var pass2 = document.getElementById("create_new_Pass_2").value;
+
+			if(user.length == 0)
+			{
+				alert("Enter a Username");
+			}
+			else if(pass1.length == 0)
+			{
+				alert("Enter a Password");
+			}
+			else if(pass2.length == 0)
+			{
+				alert("Re-enter the password");
+			}
+			else if(pass1 != pass2)
+			{
+				alert("Passwords do not match");
+			}
+			else //create account
+			{
+				var success = true;
+				
+				if(success)
+				{
+					var email = user;
+					var pass = pass1;
+					var user_tuple = [email, pass];
+					
+					socket.emit('user created', user_tuple);
+					alert("Successfully Created User!");
+					login_screen_create_Account_back();
+				}
+			}
+		}
+
+</script>
+
+</body>
+
+</html>

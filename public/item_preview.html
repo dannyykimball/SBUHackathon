@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  </head>
+<head>
+
+
+      <div style="position: absolute; width:102%;top: -1px; left: -1px; height:151px; background-color: #EDF8FF"></div>
+<div style="position: absolute; width:102%;top: -1px; left: -1px; height:151px; background-color: #DEE4E5"></div>
+<div class = "center" style="position: absolute; width:500px;top: -1px; left: 50%; height:151px; background-color: #fff"></div>
+
+<div style="position: absolute; width:102%;top: -1px; left: -1px; height:51px; background-color: #fff"></div>
+
+
+    
+</head>
+<head>
+      <div style="position: absolute; width:200px;top: 150px; left: -1px; height:900px;border:4px solid #EDF8FF;background-color: #EDF8FF"></div>
+
+      <div style="position: absolute; width:200px;top: 150px; right: 1px; height:900px;border:4px solid #EDF8FF;background-color: #EDF8FF"></div>
+      
+</head>
+<body onload="startUp()">
+
+ 
+  <img id = "pic" class = "center" src="placeholder-img.jpg" alt="jpg" style = "width:400px;height:300px; top: 200px;"> 
+  <img class = "center" src="browsetitle.png" alt="browser" style = "position : absolute; width:680px;height:200px; top: -15px;"> 
+ <h2 id = "name" class = "center" style = "width:720px;height:200px; top: 300px;"></h2>
+ <h3 id = "owner_name" class = "center" style = "width:720px;height:200px; top: 340px;">Seller:  </h3>
+ <h3 id = "price" class = "center" style = "width:720px;height:200px; top: 400px;"> Price </h3>
+ <h3 id = "desc" class = "center" style = "width:720px; height:200px; top: 540px;"> Item Description xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</h3>
+
+    
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+  function startUp()
+  {
+    
+    var name = localStorage.getItem('prod_name');
+    var price = localStorage.getItem('prod_price');
+    var posterID = localStorage.getItem('posterID');
+    var pic = localStorage.getItem('pic');
+    var cat = localStorage.getItem('prod_cat');
+    var desc = localStorage.getItem('prod_desc');
+
+    var dataImage = localStorage.getItem('imgData');
+    var image = new Image();
+    image = document.getElementById('pic');
+    image.src = dataImage;
+
+    console.log("name:" + name);
+    console.log("price:" + price);
+    console.log("ID" + posterID);
+    console.log("pic:" + pic);
+    console.log("cat:" + cat);
+    console.log("Desc:" + desc);
+    
+    $("#name").text("Name:" + name);
+    $("#price").text("Price: $" + price);
+    $("#desc").text(desc);
+  }
+
+  
+
+
+</script>
+<style>
+
+.p.a{
+  white-space: normal;
+}
+
+
+.wrapper{
+  position: absolute;
+  bottom: 100px;
+  right: 30%;
+}
+
+
+.ace{
+  display: inline-block;
+
+}
+.html, body{
+  background-color: #fff;
+}
+  
+.center{
+    position: relative;
+    font-size: 20px;
+    margin: 0;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    -ms-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+}
+</style>
+
+</body>
+</html>

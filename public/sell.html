@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+      <div style="position: fixed; width:102%;top: -1px; left: -1px; height:151px; background-color: #EDF8FF"></div>
+<div style="position: fixed; width:102%;top: -1px; left: -1px; height:151px; background-color: #DEE4E5"></div>
+      <div style="position: fixed; width:340px;top: 55px; left: 37%; height:100px; background-color: #fff"></div>
+
+<div style="position: fixed; width:102%;top: -1px; left: -1px; height:51px; background-color: #fff"></div>
+    <div class="center">
+        <img class = "selltitle" src="/assets/selltitle.png" alt="Sell" style="width:510px;height:170px;">
+      </div>
+</head>
+<head>
+      <div style="position: fixed; width:200px;top: 150px; left: -1px; height:900px;border:4px solid #EDF8FF;background-color: #EDF8FF"></div>
+
+      <div style="position: fixed; width:200px;top: 150px; right: 1px; height:900px;border:4px solid #EDF8FF;background-color: #EDF8FF"></div>
+      
+</head>
+<body>
+
+    <div class="wrapper"> 
+      <p>Category</p>
+        <div id="ace"><input id = "ele" type="checkbox">Electronics</div>
+        <div id="ace"><input id = "app" type="checkbox">Appliances</div>
+        <div id="ace"><input id = "fur" type="checkbox">Furniture</div>
+        <div id="ace"><input id = "too" type="checkbox">Tools</div>
+        <div id="ace"><input id = "aut" type="checkbox">Autoparts</div>
+        <div id="ace"><input id = "mis" type="checkbox">Other/Misc</div>
+    <div>
+
+  <div class="wrapper2">
+    <p>Product name</p>
+    <input id = "name" type="text" placeholder="Name" name="uname" required>
+    <p>Price</p>
+    <input id = "price" type="number" placeholder="Price" name="uname" required>
+    <p class="a">
+        <p>Description</p>
+        <textarea id = "Desc" rows="4" cols="50" placeholder="Enter a description for your product!"></textarea>
+      </p>
+      <p>Image Link</p>
+      <input id = "pic" type="text" placeholder="link" name="uname" required>
+  
+  </div>
+  <p class= "a">
+  </p>
+
+  <!--
+  <input type="file" accept="image/*" onchange="loadFile(event)">
+  <img id="output"/>
+
+
+  -->
+
+  <script>/*
+    var loadFile = function(event) {
+      var reader = new FileReader();
+      reader.onload = function(){
+        var output = document.getElementById('output');
+        output.src = reader.result;
+        localStorage.setItem("imgData", output.src);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+
+    };*/
+  </script>
+
+
+  <button id = "button" onclick = "submit()">Upload</button>
+
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+  
+
+
+  <script>
+
+  function imageIsLoaded(e) { alert(e); }
+
+  var socket = io();
+
+  $(function () 
+	{
+      socket.on('created_item', function(result){
+        
+        localStorage.setItem('prod_name', result[0]);
+        localStorage.setItem('prod_price', result[1]);
+        localStorage.setItem('prod_desc', result[2]);
+        localStorage.setItem('prod_ID', result[3]);
+        localStorage.setItem('prod_cat', result[4]);
+        localStorage.setItem('prod_pic', result[5]);
+
+        window.location.href = "main.html";
+		});
+  });
+  
+    function submit()
+    {
+      var cat = [];
+
+      if(document.getElementById("ele").checked)
+      {
+        cat.push("Electronics");
+      }
+      if(document.getElementById("app").checked)
+      {
+        cat.push("Appliances");
+      }
+      if(document.getElementById("fur").checked)
+      {
+        cat.push("Furniture");
+      }
+      if(document.getElementById("too").checked)
+      {
+        cat.push("Tools");
+      }
+      if(document.getElementById("aut").checked)
+      {
+        cat.push("Autoparts");
+      }
+      if(document.getElementById("mis").checked)
+      {
+        cat.push("Misc");
+      }
+    
+      if(! document.getElementById("ele").checked && !document.getElementById("app").checked && !document.getElementById("fur").checked 
+      && !document.getElementById("too").checked && !document.getElementById("aut").checked && !document.getElementById("mis").checked)
+      {
+        alert("You must select a category");
+      }
+      else if(document.getElementById("name").value.length ==0)
+      {
+        alert("You must enter a name");
+      }
+      else if(document.getElementById("price").value.length ==0 )
+      {
+        alert("You must enter a price");
+      }
+      else
+      {
+        var yeah = [];
+        var name = document.getElementById("name").value;
+        var price = document.getElementById("price").value;
+        var desc = document.getElementById("Desc").value;
+        var piclink = document.getElementById("pic").value;
+        yeah.push(name);
+        yeah.push(price);
+        yeah.push(desc);
+        yeah.push(localStorage.getItem("ID"));
+        yeah.push(piclink);
+        yeah.push(cat);
+
+        socket.emit('item_created', yeah);
+      }
+    }
+    </script>
+<style>
+
+.p.a{
+  white-space: normal;
+}
+
+
+.wrapper{
+  position: absolute;
+  bottom: 50px;
+  left: 45%;
+}
+
+
+.ace{
+  display: inline-block;
+
+}
+.html, body{
+  background-color: #fff;
+}
+  
+.center{
+    position: relative;
+    font-size: 20px;
+    margin: 0;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    -ms-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+}
+.output{
+  position: absolute;
+  left:40%;
+  top:70%;
+  width: 20%;
+  length: 20%;
+}
+</style>
+
+</body>
+</html>
